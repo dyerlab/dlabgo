@@ -6,7 +6,7 @@ import (
 
 // Genotype is a light weight structore for a diploid locus
 type Genotype struct {
-	Alleles []string
+	Alleles []string `json:"Alleles"`
 }
 
 // Ploidy returns the number of alleles in the genotype

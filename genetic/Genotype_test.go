@@ -1,6 +1,7 @@
 package genetic
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -26,5 +27,7 @@ func TestGenotype(t *testing.T) {
 	if geno.Ploidy() != 2 {
 		t.Error("Wrong ploidy")
 	}
+
+	fmt.Println(geno)
 
 }

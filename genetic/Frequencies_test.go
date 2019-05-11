@@ -1,6 +1,10 @@
 package genetic
 
 import (
+	"fmt"
+	"math"
+	"reflect"
+	"sort"
 	"testing"
 )
 
@@ -37,4 +41,21 @@ func TestFrequencies(t *testing.T) {
 	if freqs.GetFrequency("A") != 4.0/6.0 {
 		t.Error("Bad frequency for present allele.")
 	}
+
+	allalleles := freqs.Alleles()
+	sort.Strings(allalleles)
+	exp := []string{"A", "B"}
+
+	if !reflect.DeepEqual(allalleles, exp) {
+		t.Error("Alleles not returning right alleles")
+	}
+
+	fmt.Println(freqs)
+
+	ae := freqs.Ae()
+	aeExp := 1.0 / ((1.0/3.0)*(1.0/3.0) + (2.0/3.0)*(2.0/3.0))
+	if math.Abs(ae-aeExp) > 0.000001 {
+		t.Errorf("Value was: %f, expected %f, who are different as %v", ae, aeExp, ae-aeExp)
+	}
+
 }

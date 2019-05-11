@@ -1,19 +1,23 @@
 package genetic
 
+import "fmt"
+
 // Locus structure collects genotypes
 type Locus struct {
-	Name              string
-	genotypes         []Genotype
-	AlleleFrequencies Frequencies
+	Name              string      `json:"name"`
+	Genotypes         []Genotype  `json:"genotypes"`
+	AlleleFrequencies Frequencies `json:"Frequencies"`
 }
 
 // AddGenotype is the entry for adding genetic information to this locus
-func (l Locus) AddGenotype(g Genotype) {
+func (l *Locus) AddGenotype(g Genotype) {
 	l.AlleleFrequencies.AddGenotype(g)
-	l.genotypes = append(l.genotypes, g)
+	l.Genotypes = append(l.Genotypes, g)
+
+	fmt.Printf("ADded locus %s now has %d\n", g, len(l.Genotypes))
 }
 
-// Genotypes is the official getter (to enforce adding through AddGenotype())
-func (l Locus) Genotypes() []Genotype {
-	return l.genotypes
+// Count returns the number of genotypes at the locus
+func (l Locus) Count() int {
+	return len(l.Genotypes)
 }
